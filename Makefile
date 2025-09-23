@@ -1,39 +1,20 @@
 SHELL=/bin/bash
 
-checks: breakage language symlinks deps lint
+baseUrl = https://raw.githubusercontent.com/BinaryBirds/github-workflows/refs/heads/main/scripts
 
-breakage:
-	swift package --disable-sandbox check-api-breakage
+check: symlinks language deps lint
 
 symlinks:
-	swift package --disable-sandbox check-broken-symlinks
-
-deps:
-	swift package --disable-sandbox check-local-swift-dependencies
-
-security:
-	swift package --disable-sandbox check-openapi-security
-
-validation:
-	swift package --disable-sandbox check-openapi-validation
+	curl -s $(baseUrl)/check-broken-symlinks.sh | bash
 
 language:
-	swift package --disable-sandbox check-unacceptable-language
+	curl -s $(baseUrl)/check-unacceptable-language.sh | bash
 
-contributors:
-	swift package --disable-sandbox generate-contributors-list
-
-install-format:
-	swift package --disable-sandbox install-swift-format
-
-run-clean:
-	swift package --disable-sandbox run-clean
-	
-chmod:
-	swift package --disable-sandbox run-chmod
+deps:
+	curl -s $(baseUrl)/check-local-swift-dependencies.sh | bash
 
 lint:
-	swift package --disable-sandbox run-swift-format
+	curl -s $(baseUrl)/run-swift-format.sh | bash
 
 format:
-	swift package --disable-sandbox run-swift-format --fix
+	curl -s $(baseUrl)/run-swift-format.sh | bash -s -- --fix
