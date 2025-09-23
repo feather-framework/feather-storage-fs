@@ -9,8 +9,8 @@ import FeatherComponent
 import FeatherStorage
 import Foundation
 import NIO
-import _NIOFileSystem
 import NIOFoundationCompat
+import _NIOFileSystem
 
 @dynamicMemberLookup
 struct LocalStorageComponent {
