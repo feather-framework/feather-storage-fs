@@ -38,4 +38,4 @@ test:
 	swift test --parallel
 
 docker-test:
-	docker build -t feather-storage-ephemeral-tests . -f ./docker/tests/Dockerfile && docker run --rm feather-storage-ephemeral-tests
+	docker build -t feather-storage-fs-tests . -f ./docker/tests/Dockerfile && docker run --rm feather-storage-fs-tests
