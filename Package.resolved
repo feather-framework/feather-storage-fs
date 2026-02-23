@@ -1,21 +1,13 @@
 {
+  "originHash" : "771b3e288f1f2dbc38a5095efd0cec6bab40ecdc4fe5e26b804b01eaf2a1bbe3",
   "pins" : [
-    {
-      "identity" : "feather-component",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/feather-framework/feather-component",
-      "state" : {
-        "revision" : "c209d87352d27afc124422db11c9ca2bb0f7a376",
-        "version" : "0.5.0"
-      }
-    },
     {
       "identity" : "feather-storage",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/feather-framework/feather-storage",
       "state" : {
-        "revision" : "9f1628ed89f52e0a8c1ebf38120dffcc27e2bebe",
-        "version" : "0.6.2"
+        "revision" : "1fb8f07c419b2ec73a6875b28c6e2d219a65f1da",
+        "version" : "1.0.0-beta.1"
       }
     },
     {
@@ -37,30 +29,12 @@
       }
     },
     {
-      "identity" : "swift-log",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-log",
-      "state" : {
-        "revision" : "ce592ae52f982c847a4efc0dd881cc9eb32d29f2",
-        "version" : "1.6.4"
-      }
-    },
-    {
       "identity" : "swift-nio",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-nio",
       "state" : {
         "revision" : "154706efd36d8d8a7d030eea9bcbeca56a947c62",
         "version" : "2.86.1"
-      }
-    },
-    {
-      "identity" : "swift-plugins",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/BinaryBirds/swift-plugins",
-      "state" : {
-        "revision" : "6ef683f43f732dbc59634f3468ee6521ab23db93",
-        "version" : "0.0.4"
       }
     },
     {
@@ -73,5 +47,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

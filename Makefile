@@ -2,7 +2,7 @@ SHELL=/bin/bash
 
 baseUrl = https://raw.githubusercontent.com/BinaryBirds/github-workflows/refs/heads/main/scripts
 
-check: symlinks language deps lint
+check: symlinks language deps lint headers
 
 symlinks:
 	curl -s $(baseUrl)/check-broken-symlinks.sh | bash
@@ -18,3 +18,24 @@ lint:
 
 format:
 	curl -s $(baseUrl)/run-swift-format.sh | bash -s -- --fix
+
+docc-local:
+	curl -s $(baseUrl)/generate-docc.sh | bash -s -- --local
+
+run-docc:
+	curl -s $(baseUrl)/run-docc-docker.sh | bash
+
+docc-warnings:
+	curl -s $(baseUrl)/check-docc-warnings.sh | bash
+
+headers:
+	curl -s $(baseUrl)/check-swift-headers.sh | bash
+
+fix-headers:
+	curl -s $(baseUrl)/check-swift-headers.sh | bash -s -- --fix
+	
+test:
+	swift test --parallel
+
+docker-test:
+	docker build -t feather-storage-ephemeral-tests . -f ./docker/tests/Dockerfile && docker run --rm feather-storage-ephemeral-tests
