@@ -1,13 +1,13 @@
 {
-  "originHash" : "771b3e288f1f2dbc38a5095efd0cec6bab40ecdc4fe5e26b804b01eaf2a1bbe3",
+  "originHash" : "6838802cf0c095e9c8635080fca2a4437fe0abd5c0653785c5271c19c1a33351",
   "pins" : [
     {
       "identity" : "feather-storage",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/feather-framework/feather-storage",
       "state" : {
-        "revision" : "1fb8f07c419b2ec73a6875b28c6e2d219a65f1da",
-        "version" : "1.0.0-beta.1"
+        "revision" : "d9cf9f07b3b270d34b5ac34fcbbbe765a85b17b8",
+        "version" : "1.0.0-beta.2"
       }
     },
     {
