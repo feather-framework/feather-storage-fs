@@ -1,16 +1,16 @@
-# Feather Storage Ephemeral
+# Feather Storage FS
 
-Ephemeral (in-memory) driver implementation for the abstract [Feather Storage](https://github.com/feather-framework/feather-storage) Swift API package.
+File system-based driver implementation for the abstract [Feather Storage](https://github.com/feather-framework/feather-storage) Swift API package.
 
 [
     ![Release: 1.0.0-beta.1](https://img.shields.io/badge/Release-1%2E0%2E0--beta%2E1-F05138)
 ](
-    https://github.com/feather-framework/feather-storage-ephemeral/releases/tag/1.0.0-beta.1
+    https://github.com/feather-framework/feather-storage-fs/releases/tag/1.0.0-beta.1
 )
 
 ## Features
 
-- Ephemeral (in-memory) driver for Feather Storage
+- File system-based (NIO) driver for Feather Storage
 - Designed for modern Swift concurrency
 - DocC-based API Documentation
 - Unit tests and code coverage
@@ -34,13 +34,13 @@ Ephemeral (in-memory) driver implementation for the abstract [Feather Storage](h
 Add the dependency to your `Package.swift`:
 
 ```swift
-.package(url: "https://github.com/feather-framework/feather-storage-ephemeral", exact: "1.0.0-beta.1"),
+.package(url: "https://github.com/feather-framework/feather-storage-fs", exact: "1.0.0-beta.1"),
 ```
 
-Then add `FeatherStorageEphemeral` to your target dependencies:
+Then add `FeatherStorageFS` to your target dependencies:
 
 ```swift
-.product(name: "FeatherStorageEphemeral", package: "feather-storage-ephemeral"),
+.product(name: "FeatherStorageFS", package: "feather-storage-fs"),
 ```
 
 ## Usage
@@ -50,7 +50,7 @@ API documentation is available at the link below:
 [
     ![DocC API documentation](https://img.shields.io/badge/DocC-API_documentation-F05138)
 ](
-    https://feather-framework.github.io/feather-storage-ephemeral/
+    https://feather-framework.github.io/feather-storage-fs/
 )
 
 Here is a brief example:
@@ -58,9 +58,10 @@ Here is a brief example:
 ```swift
 import NIOCore
 import FeatherStorage
-import FeatherStorageEphemeral
+import FeatherStorageFS
 
-let storage = StorageClientEphemeral()
+let path = "/path/to/storage"
+let storage = StorageClientFS(rootPath: path)
 
 let text = "Hello, World"
 var buffer = ByteBufferAllocator().buffer(capacity: text.utf8.count)
@@ -90,7 +91,7 @@ print(value)
 
 The following storage client implementations are also available for use:
 
-- [FS](https://github.com/feather-framework/feather-storage-fs)
+- [Ephemeral](https://github.com/feather-framework/feather-storage-ephemeral)
 - [S3](https://github.com/feather-framework/feather-storage-s3)
 
 ## Development
@@ -104,5 +105,5 @@ The following storage client implementations are also available for use:
 
 ## Contributing
 
-[Pull requests](https://github.com/feather-framework/feather-storage-ephemeral/pulls) are welcome. Please keep changes focused and include tests for new logic. 🙏
+[Pull requests](https://github.com/feather-framework/feather-storage-fs/pulls) are welcome. Please keep changes focused and include tests for new logic. 🙏
 
