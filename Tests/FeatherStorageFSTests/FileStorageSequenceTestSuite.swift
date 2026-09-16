@@ -96,7 +96,8 @@ struct FileStorageSequenceTestSuite {
         var iterator = FileStorageSequence(
             handle: handle,
             chunks: handle.readChunks(in: 0..<10, chunkLength: .bytes(4))
-        ).makeAsyncIterator()
+        )
+        .makeAsyncIterator()
 
         for _ in 0..<10 {
             await Task.yield()
@@ -108,7 +109,10 @@ struct FileStorageSequenceTestSuite {
             result.writeBuffer(&chunk)
         }
         #expect(
-            result.getString(at: result.readerIndex, length: result.readableBytes)
+            result.getString(
+                at: result.readerIndex,
+                length: result.readableBytes
+            )
                 == "0123456789"
         )
     }
