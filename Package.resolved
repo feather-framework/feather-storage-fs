@@ -1,6 +1,15 @@
 {
-  "originHash" : "6838802cf0c095e9c8635080fca2a4437fe0abd5c0653785c5271c19c1a33351",
+  "originHash" : "2aca8ac8a8abcc1aa7b3f3d59465610d8a9b61a08d83e04f300eea58e74aadfd",
   "pins" : [
+    {
+      "identity" : "feather-storage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/feather-framework/feather-storage",
+      "state" : {
+        "revision" : "bf6d985e4f077296d26373f204f634cbdcddfa21",
+        "version" : "1.0.0-beta.3"
+      }
+    },
     {
       "identity" : "swift-atomics",
       "kind" : "remoteSourceControl",
