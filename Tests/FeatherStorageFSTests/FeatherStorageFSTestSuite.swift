@@ -119,4 +119,48 @@ struct FeatherStorageFSTestSuite {
                 == "part-two"
         )
     }
+
+    @Test
+    func downloadPreservesChunkBoundariesAndRanges() async throws {
+        let fileSystem = FileSystem.shared
+        let rootPath =
+            "/tmp/feather-storage-fs-tests-\(UInt64.random(in: .min ... .max))"
+        try await fileSystem.createDirectory(
+            at: .init(rootPath),
+            withIntermediateDirectories: true
+        )
+        defer {
+            Task {
+                _ = try? await fileSystem.removeItem(
+                    at: .init(rootPath),
+                    strategy: .platformDefault,
+                    recursively: true
+                )
+            }
+        }
+
+        let storage = StorageClientFS(rootPath: rootPath, chunkSize: 4)
+        var data = ByteBufferAllocator().buffer(capacity: 10)
+        data.writeString("0123456789")
+        try await storage.upload(
+            key: "ranges/value.txt",
+            sequence: .init(buffer: data)
+        )
+
+        let downloaded = try await storage.download(
+            key: "ranges/value.txt",
+            range: 2...8
+        )
+        var iterator = downloaded.makeAsyncIterator()
+        let first = try await iterator.next()
+        let second = try await iterator.next()
+        let end = try await iterator.next()
+
+        #expect(downloaded.length == 7)
+        #expect(first?.readableBytes == 4)
+        #expect(first?.getString(at: 0, length: 4) == "2345")
+        #expect(second?.readableBytes == 3)
+        #expect(second?.getString(at: 0, length: 3) == "678")
+        #expect(end == nil)
+    }
 }
