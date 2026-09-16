@@ -119,7 +119,7 @@ public struct StorageClientFS: StorageClient {
             }
 
             let handle = try await fileSystem.openFile(forReadingAt: path)
-            let stream = FileStorageSequence(
+            let stream = FileStorageAsyncSequence(
                 handle: handle,
                 chunks: handle.readChunks(
                     in: start..<(end + 1),

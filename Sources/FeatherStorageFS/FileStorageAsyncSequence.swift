@@ -1,5 +1,5 @@
 //
-//  FileStorageSequence.swift
+//  FileStorageAsyncSequence.swift
 //  feather-storage-fs
 //
 //  Created by Tibor Bödecs on 2023. 01. 16.
@@ -9,7 +9,7 @@ import Synchronization
 import _NIOFileSystem
 
 /// A pull-based sequence of chunks from an open file handle.
-struct FileStorageSequence: AsyncSequence, Sendable {
+struct FileStorageAsyncSequence: AsyncSequence, Sendable {
     typealias Element = ByteBuffer
 
     fileprivate final class HandleState: Sendable {

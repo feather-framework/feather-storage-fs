@@ -1,5 +1,5 @@
 //
-//  FileStorageSequenceTestSuite.swift
+//  FileStorageAsyncSequenceTestSuite.swift
 //  feather-storage-fs
 //
 //  Created by Tibor Bödecs on 2023. 01. 16.
@@ -12,7 +12,7 @@ import _NIOFileSystem
 @testable import FeatherStorageFS
 
 @Suite
-struct FileStorageSequenceTestSuite {
+struct FileStorageAsyncSequenceTestSuite {
 
     @Test
     func closesHandleAfterReachingEnd() async throws {
@@ -44,7 +44,7 @@ struct FileStorageSequenceTestSuite {
         let handle = try await fileSystem.openFile(
             forReadingAt: .init(rootPath + "/value.txt")
         )
-        let sequence = FileStorageSequence(
+        let sequence = FileStorageAsyncSequence(
             handle: handle,
             chunks: handle.readChunks(in: 0..<10, chunkLength: .bytes(4))
         )
@@ -93,7 +93,7 @@ struct FileStorageSequenceTestSuite {
         let handle = try await fileSystem.openFile(
             forReadingAt: .init(rootPath + "/value.txt")
         )
-        var iterator = FileStorageSequence(
+        var iterator = FileStorageAsyncSequence(
             handle: handle,
             chunks: handle.readChunks(in: 0..<10, chunkLength: .bytes(4))
         )
@@ -148,7 +148,7 @@ struct FileStorageSequenceTestSuite {
             forReadingAt: .init(rootPath + "/value.txt")
         )
         do {
-            let sequence = FileStorageSequence(
+            let sequence = FileStorageAsyncSequence(
                 handle: handle,
                 chunks: handle.readChunks(in: 0..<10, chunkLength: .bytes(4))
             )
