@@ -118,30 +118,14 @@ public struct StorageClientFS: StorageClient {
                 throw StorageClientError.invalidBuffer
             }
 
-            let stream = AsyncThrowingStream<ByteBuffer, Error> {
-                continuation in
-                let task = Task {
-                    do {
-                        try await fileSystem.withFileHandle(
-                            forReadingAt: path
-                        ) { fileHandle in
-                            for try await chunk in fileHandle.readChunks(
-                                in: start...end,
-                                chunkLength: .bytes(Int64(chunkSize))
-                            ) {
-                                continuation.yield(chunk)
-                            }
-                        }
-                        continuation.finish()
-                    }
-                    catch {
-                        continuation.finish(throwing: error)
-                    }
-                }
-                continuation.onTermination = { _ in
-                    task.cancel()
-                }
-            }
+            let handle = try await fileSystem.openFile(forReadingAt: path)
+            let stream = FileStorageAsyncSequence(
+                handle: handle,
+                chunks: handle.readChunks(
+                    in: start..<(end + 1),
+                    chunkLength: .bytes(Int64(chunkSize))
+                )
+            )
 
             return StorageSequence(
                 asyncSequence: stream,
