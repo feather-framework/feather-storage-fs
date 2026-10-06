@@ -36,6 +36,7 @@ public struct StorageClientFS: StorageClient {
     /// - Parameters:
     ///   - key: The object key relative to `rootPath`.
     ///   - sequence: The byte sequence to persist.
+    ///   - contentType: The optional content type for the object.
     /// - Throws: `StorageClientError` when the key is invalid or I/O fails.
     public func upload(
         key: String,
