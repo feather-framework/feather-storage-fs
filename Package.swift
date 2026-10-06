@@ -1,25 +1,21 @@
-// swift-tools-version:6.1
+// swift-tools-version:6.3
 import PackageDescription
 
-// NOTE: https://github.com/swift-server/swift-http-server/blob/main/Package.swift
-var defaultSwiftSettings: [SwiftSetting] =
-[
-    // https://github.com/swiftlang/swift-evolution/blob/main/proposals/0441-formalize-language-mode-terminology.md
+let swiftSettings: [SwiftSetting] = [
     .swiftLanguageMode(.v6),
-    // https://github.com/swiftlang/swift-evolution/blob/main/proposals/0444-member-import-visibility.md
+    .strictMemorySafety(),
+    .treatAllWarnings(as: .error),
+    .enableUpcomingFeature("InternalImportsByDefault"),
+    .enableUpcomingFeature("ExistentialAny"),
     .enableUpcomingFeature("MemberImportVisibility"),
-    // https://forums.swift.org/t/experimental-support-for-lifetime-dependencies-in-swift-6-2-and-beyond/78638
+    .enableUpcomingFeature("InferIsolatedConformances"),
+    .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
+    .enableUpcomingFeature("ImmutableWeakCaptures"),
+    .enableExperimentalFeature("SuppressedAssociatedTypes"),
+    .enableExperimentalFeature("LifetimeDependence"),
     .enableExperimentalFeature("Lifetimes"),
-    // https://github.com/swiftlang/swift/pull/65218
-    .enableExperimentalFeature("AvailabilityMacro=featherStorageFS 1.0:macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0"),
+    .enableUpcomingFeature("StrictConcurrency"),
 ]
-
-#if compiler(>=6.2)
-defaultSwiftSettings.append(
-    // https://github.com/swiftlang/swift-evolution/blob/main/proposals/0461-async-function-isolation.md
-    .enableUpcomingFeature("NonisolatedNonsendingByDefault")
-)
-#endif
 
 let package = Package(
     name: "feather-storage-fs",
@@ -34,9 +30,8 @@ let package = Package(
         .library(name: "FeatherStorageFS", targets: ["FeatherStorageFS"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-nio", from: "2.0.0"),
-        .package(url: "https://github.com/feather-framework/feather-storage", exact: "1.0.0-beta.3"),
-        // [docc-plugin-placeholder]
+        .package(url: "https://github.com/apple/swift-nio", from: "2.100.0"),
+        .package(url: "https://github.com/feather-framework/feather-storage", exact: "1.0.0-rc.1"),
     ],
     targets: [
         .target(
@@ -46,7 +41,7 @@ let package = Package(
                 .product(name: "FeatherStorage", package: "feather-storage"),
                 
             ],
-            swiftSettings: defaultSwiftSettings
+            swiftSettings: swiftSettings
         ),
         .testTarget(
             name: "FeatherStorageFSTests",
@@ -54,7 +49,7 @@ let package = Package(
                 .target(name: "FeatherStorageFS"),
                 .product(name: "FeatherStorage", package: "feather-storage"),
             ],
-            swiftSettings: defaultSwiftSettings
+            swiftSettings: swiftSettings
         ),
     ]
 )
