@@ -4,10 +4,10 @@
 //
 //  Created by Tibor Bödecs on 2023. 01. 16.
 
-import FeatherStorage
+public import FeatherStorage
 import NIOCore
 import SystemPackage
-import _NIOFileSystem
+public import _NIOFileSystem
 
 /// Filesystem-backed storage driver implemented via NIO FileSystem APIs.
 public struct StorageClientFS: StorageClient {
@@ -39,7 +39,8 @@ public struct StorageClientFS: StorageClient {
     /// - Throws: `StorageClientError` when the key is invalid or I/O fails.
     public func upload(
         key: String,
-        sequence: StorageSequence
+        sequence: StorageSequence,
+        contentType: String?
     ) async throws(StorageClientError) {
         let destination = try resolvePath(for: key)
         let parent = parentPath(of: destination)
@@ -84,6 +85,20 @@ public struct StorageClientFS: StorageClient {
         catch {
             throw .unknown(error)
         }
+    }
+
+    /// Uploads a full object without additional metadata.
+    ///
+    /// This overload preserves compatibility with the original storage API.
+    public func upload(
+        key: String,
+        sequence: StorageSequence
+    ) async throws(StorageClientError) {
+        try await upload(
+            key: key,
+            sequence: sequence,
+            contentType: nil
+        )
     }
 
     /// Downloads an object or byte range for a storage key.
