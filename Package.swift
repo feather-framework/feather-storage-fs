@@ -31,7 +31,10 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-nio", from: "2.100.0"),
-        .package(url: "https://github.com/feather-framework/feather-storage", exact: "1.0.0-rc.1"),
+        .package(
+            url: "https://github.com/feather-framework/feather-storage",
+            exact: "1.0.0-rc.2"
+        ),
     ],
     targets: [
         .target(

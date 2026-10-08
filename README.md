@@ -3,9 +3,9 @@
 File system-based driver implementation for the abstract [Feather Storage](https://github.com/feather-framework/feather-storage) Swift API package.
 
 [
-    ![Release: 1.0.0-rc.1](https://img.shields.io/badge/Release-1%2E0%2E0--rc%2E1-F05138)
+    ![Release: 1.0.0-rc.2](https://img.shields.io/badge/Release-1%2E0%2E0--rc%2E2-F05138)
 ](
-    https://github.com/feather-framework/feather-storage-fs/releases/tag/1.0.0-rc.1
+    https://github.com/feather-framework/feather-storage-fs/releases/tag/1.0.0-rc.2
 )
 
 ## Features
@@ -34,7 +34,7 @@ File system-based driver implementation for the abstract [Feather Storage](https
 Add the dependency to your `Package.swift`:
 
 ```swift
-.package(url: "https://github.com/feather-framework/feather-storage-fs", exact: "1.0.0-rc.1"),
+.package(url: "https://github.com/feather-framework/feather-storage-fs", exact: "1.0.0-rc.2"),
 ```
 
 Then add `FeatherStorageFS` to your target dependencies:
