@@ -321,11 +321,14 @@ public struct StorageClientFS: StorageClient {
 
     /// Creates a multipart upload identifier for a key.
     ///
-    /// - Parameter key: The destination object key for the multipart upload.
+    /// - Parameters:
+    ///   - key: The destination object key for the multipart upload.
+    ///   - contentType: Optional MIME type, ignored by filesystem storage.
     /// - Returns: A newly reserved multipart upload identifier.
     /// - Throws: `StorageClientError` when identifier reservation fails.
     public func createMultipartId(
-        key: String
+        key: String,
+        contentType: String?
     ) async throws(StorageClientError) -> String {
         do {
             for _ in 0..<16 {
